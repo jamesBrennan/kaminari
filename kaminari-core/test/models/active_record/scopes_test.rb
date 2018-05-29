@@ -346,6 +346,10 @@ if defined? ActiveRecord
             assert_true model_class.page(10).per(10).last_page?
           end
 
+          test 'on last page, merged scope' do
+            assert_true model_class.none.merge!(model_class.page(10).per(10)).last_page?
+          end
+
           test 'within range' do
             assert_false model_class.page(1).per(10).last_page?
           end
